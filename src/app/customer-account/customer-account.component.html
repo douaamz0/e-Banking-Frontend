@@ -1,0 +1,36 @@
+<div class="container mt-2">
+  <ng-container *ngIf="accounts | async as listAccounts; else failureOrLoading">
+    <div class="card">
+      <div class="card-header">
+        Customer's accounts
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>ID</th><th>Balance</th><th>Type</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let a of listAccounts">
+            <td>{{a.id }}</td>
+            <td>{{a.balance | number:'1.2-2'}}</td>
+            <td>{{a.type}}</td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #failureOrLoading>
+    <ng-container *ngIf="errorMessage; else loading">
+      <div class="text-danger">
+        {{errorMessage}}
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      Loading...
+    </ng-template>
+  </ng-template>
+</div>
